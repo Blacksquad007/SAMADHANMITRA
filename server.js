@@ -72,7 +72,7 @@ app.post('/login', async (req, res) => {
 
             if (passwordMatch) {
                 // Redirect to another page after successful login
-                res.redirect('/Impact/index.html');
+                res.redirect('/impact/index.html');
             } else {
                 res.status(401).json({ message: 'Password does not match' });
             }
