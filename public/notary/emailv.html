@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://localhost:3000/notary/emailv.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Impact Bootstrap Template - Blog</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="file:///S:/Login-signup/public/impact/assets/img/favicon.png" rel="icon">
+  <link href="file:///S:/Login-signup/public/impact/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./emailv_files/css2" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="./emailv_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./emailv_files/bootstrap-icons.css" rel="stylesheet">
+  <link href="./emailv_files/aos.css" rel="stylesheet">
+  <link href="./emailv_files/glightbox.min.css" rel="stylesheet">
+  <link href="./emailv_files/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="./emailv_files/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Impact
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center sticked">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="file:///S:/Login-signup/public/impact/index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>SamadhanMitra<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="file:///S:/Login-signup/public/impact/blog.html#hero">Home</a></li>
+          
+          <li><a href="file:///S:/Login-signup/public/impact/blog.html#services">Services</a></li>
+          
+          
+          
+          
+          <li><a href="file:///S:/Login-signup/public/impact/blog.html#contact">Contact</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main" class="sticked-header-offset">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      
+      <nav>
+        <div class="container">
+          
+            <ol>
+            <li><a href="/notary/notary.html">Home</a></li>
+
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="./emailv_files/emailv.css">
+
+
+    <div class="container">
+        <h2>Email Verification</h2>
+        <p>We,ve sent a 4-digit confirmation code to your email. <br>Make sure you enter correct code.</p>
+        <form action="http://localhost:4000/" method="post" id="verificationForm">
+            <div class="verification-code">
+                <input type="text" maxlength="1" oninput="moveToNext(this, 'code2') "pattern="[0-9]" required="">
+                <input type="text" maxlength="1" id="code2" oninput="moveToNext(this, 'code3')" pattern="[0-9]" required="">
+                <input type="text" maxlength="1" id="code3" oninput="moveToNext(this, 'code4')" pattern="[0-9]" required="">
+                <input type="text" maxlength="1" id="code4" oninput="moveToNext(this, 'code5')" pattern="[0-9]" required="">
+            </div>
+            <button type="submit" class="verify-button"><a href="http://localhost:4000/" > Verify</a></button>
+        </form>
+        <p>Didn't receive code? <a href="http://localhost:4000/">Resend Code</a></p>
+    </div>
+    <script>
+        function moveToNext(input, nextInputId) {
+            if (input.value.length >= input.maxLength) {
+                document.getElementById(nextInputId).focus();
+            }
+        }
+
+        function checkValue(inputId) {
+            const input = document.getElementById(inputId);
+            if (!/^[0-9]$/.test(input.value)) {
+                input.value = '';
+            }
+        }
+    </script>
+
+
+</main></body></html>
