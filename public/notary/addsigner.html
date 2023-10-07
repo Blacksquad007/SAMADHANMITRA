@@ -1,144 +1,198 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)http://localhost:3000/notary/keysigner.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Impact Bootstrap Template - Blog</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <title>Impact Bootstrap Template - Blog</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="file:///S:/Login-signup/public/impact/assets/img/favicon.png" rel="icon">
+    <link href="file:///S:/Login-signup/public/impact/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Favicons -->
-  <link href="file:///S:/Login-signup/public/impact/assets/img/favicon.png" rel="icon">
-  <link href="file:///S:/Login-signup/public/impact/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./keysigner_files/css2" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-  <link href="./keysigner_files/css2" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="./keysigner_files/bootstrap.min.css" rel="stylesheet">
+    <link href="./keysigner_files/bootstrap-icons.css" rel="stylesheet">
+    <link href="./keysigner_files/aos.css" rel="stylesheet">
+    <link href="./keysigner_files/glightbox.min.css" rel="stylesheet">
+    <link href="./keysigner_files/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="./keysigner_files/bootstrap.min.css" rel="stylesheet">
-  <link href="./keysigner_files/bootstrap-icons.css" rel="stylesheet">
-  <link href="./keysigner_files/aos.css" rel="stylesheet">
-  <link href="./keysigner_files/glightbox.min.css" rel="stylesheet">
-  <link href="./keysigner_files/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="./keysigner_files/main.css" rel="stylesheet">
+    
+    <style>
+        /* Style for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
 
-  <!-- Template Main CSS File -->
-  <link href="./keysigner_files/main.css" rel="stylesheet">
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
 
-  <!-- =======================================================
-  * Template Name: Impact
-  * Updated: Jul 27 2023 with Bootstrap v5.3.1
-  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        /* Style for the close button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /* Style for the buttons */
+        .popup-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .popup-buttons button {
+            margin: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
-
-  <!-- ======= Header ======= -->
-  <section id="topbar" class="topbar d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:SamadhanMitra@gmai.com">SamadhanMitra@gmai.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-      </div>
-      <div class="social-links d-none d-md-flex align-items-center">
-        <a href="file:///S:/Login-signup/public/impact/blog.html#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="file:///S:/Login-signup/public/impact/blog.html#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="file:///S:/Login-signup/public/impact/blog.html#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="file:///S:/Login-signup/public/impact/blog.html#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-      </div>
-    </div>
-  </section><!-- End Top Bar -->
-
-  <header id="header" class="header d-flex align-items-center sticked">
-
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="file:///S:/Login-signup/public/impact/index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>SamadhanMitra<span>.</span></h1>
-      </a>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="file:///S:/Login-signup/public/impact/blog.html#hero">Home</a></li>
-          
-          <li><a href="file:///S:/Login-signup/public/impact/blog.html#services">Services</a></li>
-          
-          
-          
-          
-          <li><a href="file:///S:/Login-signup/public/impact/blog.html#contact">Contact</a></li>
-        </ul>
-      </nav><!-- .navbar -->
-
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
-    </div>
-  </header><!-- End Header -->
-  <!-- End Header -->
-
-  <main id="main" class="sticked-header-offset">
-
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-      
-      <nav>
+    <section id="topbar" class="topbar d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:SamadhanMitra@gmai.com">SamadhanMitra@gmai.com</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+            </div>
+            <div class="social-links d-none d-md-flex align-items-center">
+                <a href="file:///S:/Login-signup/public/impact/blog.html#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="file:///S:/Login-signup/public/impact/blog.html#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="file:///S:/Login-signup/public/impact/blog.html#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="file:///S:/Login-signup/public/impact/blog.html#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </section>
+    <header id="header" class="header d-flex align-items-center sticked">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="file:///S:/Login-signup/public/impact/index.html" class="logo d-flex align-items-center">
+                <h1>SamadhanMitra<span>.</span></h1>
+            </a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a href="file:///S:/Login-signup/public/impact/blog.html#hero">Home</a></li>
+                    <li><a href="file:///S:/Login-signup/public/impact/blog.html#services">Services</a></li>
+                    <li><a href="file:///S:/Login-signup/public/impact/blog.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        </div>
+    </header>
+    <main id="main" class="sticked-header-offset">
+        <div class="breadcrumbs">
+            <nav>
+                <div class="container">
+                    <ol>
+                        <li><a href="http://localhost:3000/notary/notary.html">Home</a></li>
+                    </ol>
+                </div>
+            </nav>
+        </div>
+        <link rel="stylesheet" href="./keysigner_files/keysigner.css">
         <div class="container">
-          
-            <ol>
-            <li><a href="http://localhost:3000/notary/notary.html">Home</a></li>
-            <li><a href="http://localhost:3000/notary/keysigner.html">Keysigner</a></li>
-          </ol>
+            <img src="/121.jpeg" class="image">
+            <h2><center>Add Signatory Information</center></h2>
+            <div class="signup-form">
+                <form action="/submit-form" method="post" id="signupForm" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middleName" placeholder="Your Middle Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="aadhar">Aadhar Number</label>
+                        <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required>
+                    </div>
+                    <!-- Submit button triggers the display of the popup -->
+                    <button type="button" class="submit-button" onclick="showKeySignatoryPopup()">Submit</button>
+                </form>
+            </div>
         </div>
-      </nav>
-    </div><!-- End Breadcrumbs -->
-    <link rel="stylesheet" href="./keysigner_files/keysigner.css">
+        <!-- Popup for displaying key signatory details -->
+        <div class="popup" id="keySignatoryPopup">
+            <div class="popup-content">
+                <span class="close-button" onclick="closePopup()">&times;</span>
+                <h2>Add Signatory Details</h2>
+                <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+                <p><strong>Middle Name:</strong> <span id="popupMiddleName"></span></p>
+                <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+                <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+                <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
+                <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
 
-
-    <div class="container">
-        <img src="http://localhost:3000/notary/121.jpeg" class="image">
-        <h2><centre>Add Signatory Information</centre></h2>
-        <div class="signup-form">
-            
-            <form action="http://localhost:3000/notary/keysigner.html#" method="post" id="signupForm">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
+                
+                <div class="popup-buttons">
+                    <button type="button" class="submit-button" onclick="addAnotherSigner()">Continue</button>
                 </div>
-                <div class="form-group">
-                    <label for="middleName">Middle Name</label>
-                    <input type="text" id="middleName" name="middleName" placeholder="Your Middle Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
-                </div>
-                <div class="form-group">
-                    <label for="aadhar">Aadhar Number</label>
-                    <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required>
-                </div>
-               
-            </form>
+            </div>
         </div>
-        
-        <button  type="submit" class="submit-button"> <a href="/notary/empty.html">Submit</a></button>
-        
-    </div>
+        <script>
+            function showKeySignatoryPopup() {
+                // Get input values
+                var firstName = document.getElementById('firstName').value;
+                var middleName = document.getElementById('middleName').value;
+                var lastName = document.getElementById('lastName').value;
+                var email = document.getElementById('email').value;
+                var phone = document.getElementById('phone').value;
+                var aadhar = document.getElementById('aadhar').value;
+
+                // Set popup content
+                document.getElementById('popupFirstName').textContent = firstName;
+                document.getElementById('popupMiddleName').textContent = middleName;
+                document.getElementById('popupLastName').textContent = lastName;
+                document.getElementById('popupEmail').textContent = email;
+                document.getElementById('popupPhone').textContent = phone;
+                document.getElementById('popupAadhar').textContent = aadhar;
+
+                // Show the popup
+                document.getElementById('keySignatoryPopup').style.display = 'block';
+            }
 
 
-</main></body></html>
-
-
+            function addAnotherSigner() {
+              window.location.href = 'emailv.html';
+                closePopup();
+            }
+        </script>
+    </main>
+</body>
+</html>
