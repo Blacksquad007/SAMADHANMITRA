@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+.page-container {
+  overflow: auto;
+  height: 100; /* Set the container height to 100% of the viewport height */
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body,
@@ -21,6 +25,117 @@ input {
   overflow: hidden;
 }
 
+/* Radio button styling */
+.radio-group {
+  display: flex;
+  align-items: center;
+  margin-top: 10px; /* Add margin to separate from previous input fields */
+}
+
+.radio-group label {
+  cursor: pointer;
+  padding: 5px 55px;
+  border: 7px solid #ccc;
+  border-radius: 127px;
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+  position: relative;
+  display: flex; /* Add display flex */
+  align-items: center; /* Center the radio button and label vertically */
+}
+
+.radio-group label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  left: 0; /* Add left spacing to separate radio button from label */
+}
+
+.radio-group label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  width: 15px; /* Increase the width of the radio button */
+  height: 15px; /* Increase the height of the radio button */
+  background-color: transparent;
+  border: 2px solid #01b399; /* Use #01b399 color for the border */
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.radio-group label:hover::before {
+  background-color: #01b399; /* Change color on hover */
+}
+
+.radio-group input[type="radio"]:checked + label::before {
+  background-color: #01b399; /* Change color when checked */
+  border-color: #01b399; /* Change border color when checked */
+}
+
+/* Add spacing between the radio button and label */
+.radio-group label input[type="radio"] {
+  margin-right: 5px; /* Add right margin to create a gap */
+}
+
+.radio-group label input[type="radio"] {
+  margin-right: 5px; /* Add right margin to create a gap */
+}
+
+.radio-group label span {
+  margin-left: 15px;
+}
+
+.radio-group label {
+  /* ... (existing CSS styles for labels) ... */
+  display: flex;
+  align-items: center;
+}
+
+.radio-text {
+  margin-left: 5px; /* Add some spacing between the radio button and text */
+}
+
+/* ... (other CSS rules) */
+
+/* Rest of your CSS code */
+/* Style for the select element (dropdown) */
+select {
+  width: 100%;
+  padding: 7px;
+  border: 9px solid #ccc;
+  border-radius: -1px; /* Increase border-radius for a softer look */
+  background-color: #f0f0f0; /* Use a light background color */
+  font-size: 1.1rem; /* Match font size with other input fields */
+  color: #333;
+  outline: none;
+  margin: 10px 0;
+}
+
+/* Style for the dropdown arrow */
+select::after {
+  content: '\25BC'; /* Unicode character for a down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Style for the dropdown options */
+select option {
+  background-color: #fff; /* White background for options */
+  color: #333;
+}
+
+/* Style for when the dropdown is focused */
+select:focus {
+  border-color: #007BFF;
+}
+
 .forms-container {
   position: absolute;
   width: 100%;
@@ -34,19 +149,18 @@ input {
   top: 50%;
   transform: translate(-50%, -50%);
   left: 75%;
-  width: 50%;
+  width: 45%; /* Reduced width to make the form container smaller */
   transition: 1s 0.7s ease-in-out;
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
 }
-
 form {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0rem 5rem;
+  padding: 0.5rem 2rem; /* Reduced padding to make the form smaller */
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
@@ -400,3 +514,7 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+body, html {
+  height: 100%;
+}/* Style for the "Legal License Number" field */

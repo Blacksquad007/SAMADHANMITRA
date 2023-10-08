@@ -7,10 +7,13 @@
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css" />
     <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
 
+
 <body>
-    <div class="container">
+    <div class="page-container">
+        <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
                 <form action="/login" method="post" class="sign-in-form">
@@ -44,17 +47,48 @@
                 <form action="/signup" method="post" class="sign-up-form">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
+                        <div class="radio-group">
+                            <label for="user-radio">
+                                <input type="radio" name="userType" value="user" id="user-radio" checked />
+                                <span>User</span>
+                            </label>
+                            <label for="admin-radio">
+                                <input type="radio" name="userType" value="admin" id="admin-radio" />
+                                <span>Admin</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="First Name" name="firstName" required />
                     </div>
+                    
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input type="text" placeholder="Last Name" name="lastName" required />
                     </div>
                     <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="number" placeholder="Phone Number" name="phoneNumber" required />
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" placeholder="Phone Number" name="phoneNumber" required />
                     </div>
+                    <!-- End of additional fields for Admin -->
+                    <div class="input-field" id="service-dropdown" style="display: none;">
+                        <select name="service">
+                            <option value="notary">Notary</option>
+                            <option value="advocate">Advocate</option>
+                            <option value="arbitrator">Arbitrator</option>
+                            <option value="mediator">Mediator</option>
+                            <option value="document_writer">Document Writer</option>
+                        </select>
+                    </div>
+
+                    
+                    <div class="input-field">
+                        <i class="fas fa-briefcase"></i>
+                        <input type="text" placeholder="Legal License Number" name="licenseNumber" />
+                    </div>
+
+                    
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         <input type="email" placeholder="Email" name="email" required />
@@ -98,7 +132,7 @@
             </div>
             <div class="panel right-panel">
                 <div class="content">
-                    <h3>SamadhanMitra </h3>
+                    <h3>SamadhanMitra</h3>
                     <p>
                         One App, Endless Legal Solutions
                     </p>
@@ -112,6 +146,29 @@
     </div>
 
     <script src="js.js"></script>
-</body>
+<script>
+    // Get references to the radio buttons and the dropdown element
+    const adminRadio = document.getElementById("admin-radio");
+    const userRadio = document.getElementById("user-radio");
+    const serviceDropdown = document.getElementById("service-dropdown");
+ // Function to show/hide the additional fields based on radio button selection
+function toggleFields() {
+        if (adminRadio.checked) {
+            serviceDropdown.style.display = "block";
+        } else {
+            serviceDropdown.style.display = "none";
+    }
+    }
+ // Add event listeners to both radio buttons
+    adminRadio.addEventListener("change", toggleFields);
+    userRadio.addEventListener("change", toggleFields);
 
+    // Initialize the state based on the default selection
+    toggleFields();
+
+    // Function to hide the license number field initially for user
+</script>
+
+
+</body>
 </html>
