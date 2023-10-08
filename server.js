@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
                     res.redirect('/impact/index.html');
                 } else if (userType === 'admin') {
                     // Redirect admin to the admin dashboard
-                    res.redirect('/admin-dashboard.html');
+                    res.redirect('/impact/sindex.html');
                 } else {
                     // Handle invalid userType
                     res.status(400).json({ message: 'Invalid userType' });
