@@ -10,165 +10,202 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 </head>
 
-
 <body>
     <div class="page-container">
         <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <form action="/login" method="post" class="sign-in-form">
-                    <h2 class="title">Sign in</h2>
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" name="email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" name="password" required />
-                    </div>
-                    <input type="submit" value="Login" class="btn solid" />
-                    <p class="social-text">Or Sign in with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </form>
-
-                <form action="/signup" method="post" class="sign-up-form">
-                    <h2 class="title">Sign up</h2>
-                    <div class="input-field">
-                        <div class="radio-group">
-                            <label for="user-radio">
-                                <input type="radio" name="userType" value="user" id="user-radio" checked />
-                                <span>User</span>
-                            </label>
-                            <label for="admin-radio">
-                                <input type="radio" name="userType" value="admin" id="admin-radio" />
-                                <span>Admin</span>
-                            </label>
+            <div class="forms-container">
+                <div class="signin-signup">
+                    <form action="/login" method="post" class="sign-in-form">
+                        <h2 class="title">Sign in</h2>
+                        <div class="input-field">
+                            <div class="radio-group">
+                                <label for="user-radio-login">
+                                    <input type="checkbox" name="userType" value="user" id="user-radio-login" checked />
+                                    <span>User</span>
+                                </label>
+                                <label for="admin-radio-login">
+                                    <input type="checkbox" name="userType" value="admin" id="admin-radio-login" />
+                                    <span>Admin</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="First Name" name="firstName" required />
-                    </div>
-                    
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Last Name" name="lastName" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-phone"></i>
-                        <input type="tel" placeholder="Phone Number" name="phoneNumber" required />
-                    </div>
-                    <!-- End of additional fields for Admin -->
-                    <div class="input-field" id="service-dropdown" style="display: none;">
-                        <select name="service">
-                            <option value="notary">Notary</option>
-                            <option value="advocate">Advocate</option>
-                            <option value="arbitrator">Arbitrator</option>
-                            <option value="mediator">Mediator</option>
-                            <option value="document_writer">Document Writer</option>
-                        </select>
-                    </div>
+                        <div class="input-field">                    
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Email" name="email" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Password" name="password" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-briefcase"></i>
+                            <input type="text" placeholder="Legal License Number" name="licenseNumber" />
+                        </div>
+                        
+                        <!-- This is the "Login" button for the User -->
+                        <input type="submit" value="Login" class="btn solid" id="login-user" />
+                        <!-- This is the "Login2" button for the Admin -->
+                        <input type="submit" value="Login2" class="btn solid" id="login-admin" style="display: none;" />
+                        
+                        <p class="social-text">Or Sign in with social platforms</p>
+                        <div class="social-media">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </form>
 
-                    
-                    <div class="input-field">
-                        <i class="fas fa-briefcase"></i>
-                        <input type="text" placeholder="Legal License Number" name="licenseNumber" />
-                    </div>
+                    <form action="/signup" method="post" class="sign-up-form">
+                        <h2 class="title">Sign up</h2>
+                        <div class="input-field">
+                            <div class="radio-group">
+                                <label for="user-radio">
+                                    <input type="radio" name="userType" value="user" id="user-radio" checked />
+                                    <span>User</span>
+                                </label>
+                                <label for="admin-radio">
+                                    <input type="radio" name="userType" value="admin" id="admin-radio" />
+                                    <span>Admin</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="First Name" name="firstName" required />
+                        </div>
+                        
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Last Name" name="lastName" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="Phone Number" name="phoneNumber" required />
+                        </div>
+                        <!-- End of additional fields for Admin -->
+                        <div class="input-field" id="service-dropdown" style="display: none;">
+                            <select name="service">
+                                <option value="notary">Notary</option>
+                                <option value="advocate">Advocate</option>
+                                <option value="arbitrator">Arbitrator</option>
+                                <option value="mediator">Mediator</option>
+                                <option value="document_writer">Document Writer</option>
+                            </select>
+                        </div>
 
-                    
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" name="email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" name="password" required />
-                    </div>
-                    <input type="submit" class="btn" value="Sign up" />
-                    <p class="social-text">Or Sign up with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
+                        
+                        <div class="input-field">
+                            <i class="fas fa-briefcase"></i>
+                            <input type="text" placeholder="Legal License Number" name="licenseNumber" />
+                        </div>
 
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>SamadhanMitra</h3>
-                    <p>
-                        SamadhanMitra Bridging the Gap to Legal Clarity
-                    </p>
-                    <button class="btn transparent" id="sign-up-btn">
-                        Sign up
-                    </button>
+                        
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Email" name="email" required />
+                        </div>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Password" name="password" required />
+                        </div>
+                        <!-- This is the "Sign up" button for both User and Admin -->
+                        <input type="submit" class="btn" value="Sign up" id="signup" />
+                        
+                        <p class="social-text">Or Sign up with social platforms</p>
+                        <div class="social-media">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                <img src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png" class="image" alt="" />
             </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>SamadhanMitra</h3>
-                    <p>
-                        One App, Endless Legal Solutions
-                    </p>
-                    <button class="btn transparent" id="sign-in-btn">
-                        Sign in
-                    </button>
+
+            <div class="panels-container">
+                <div class="panel left-panel">
+                    <div class="content">
+                        <h3>SamadhanMitra</h3>
+                        <p>
+                            SamadhanMitra Bridging the Gap to Legal Clarity
+                        </p>
+                        <button class="btn transparent" id="sign-up-btn">
+                            Sign up
+                        </button>
+                    </div>
+                    <img src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png" class="image" alt="" />
                 </div>
-                <img src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png" class="image" alt="" />
+                <div class="panel right-panel">
+                    <div class="content">
+                        <h3>SamadhanMitra</h3>
+                        <p>
+                            One App, Endless Legal Solutions
+                        </p>
+                        <button class="btn transparent" id="sign-in-btn">
+                            Sign in
+                        </button>
+                    </div>
+                    <img src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png" class="image" alt="" />
+                </div>
             </div>
         </div>
     </div>
 
     <script src="js.js"></script>
-<script>
-    // Get references to the radio buttons and the dropdown element
-    const adminRadio = document.getElementById("admin-radio");
-    const userRadio = document.getElementById("user-radio");
-    const serviceDropdown = document.getElementById("service-dropdown");
- // Function to show/hide the additional fields based on radio button selection
-function toggleFields() {
-        if (adminRadio.checked) {
-            serviceDropdown.style.display = "block";
-        } else {
-            serviceDropdown.style.display = "none";
-    }
-    }
- // Add event listeners to both radio buttons
-    adminRadio.addEventListener("change", toggleFields);
-    userRadio.addEventListener("change", toggleFields);
-
-    // Initialize the state based on the default selection
-    toggleFields();
-
-    // Function to hide the license number field initially for user
-</script>
-
-
+ 
+    <script>
+        import { useNavigate } from "react-router-dom";
+      
+        document.addEventListener("DOMContentLoaded", function () {
+          // Get references to the radio buttons and the forms
+          const adminRadio = document.querySelector('input[name="userType"][value="admin"]');
+          const userRadio = document.querySelector('input[name="userType"][value="user"]');
+          const loginFormUser = document.querySelector(".sign-in-form.user");
+          const loginFormAdmin = document.querySelector(".sign-in-form.admin");
+      
+          // Add a submit event listener to the login form for users
+          loginFormUser.addEventListener("submit", function (e) {
+            // Prevent the default form submission
+            e.preventDefault();
+      
+            // Get the role of the user
+            const role = userRadio.checked ? "user" : "admin";
+      
+            // Redirect the user to the appropriate page based on their role
+            const navigate = useNavigate();
+            navigate(role === "user" ? "/impact/index.html" : "/admin");
+          });
+      
+          // Add a submit event listener to the login form for admins
+          loginFormAdmin.addEventListener("submit", function (e) {
+            // Prevent the default form submission
+            e.preventDefault();
+      
+            // Get the role of the user
+            const role = adminRadio.checked ? "admin" : "user";
+      
+            // Redirect the user to the appropriate page based on their role
+            const navigate = useNavigate();
+            navigate(role === "admin" ? "/admin" : "/impact/index.html");
+          });
+        });
+      </script>
 </body>
 </html>

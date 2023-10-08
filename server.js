@@ -62,7 +62,7 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, userType } = req.body;
 
     try {
         const user = await User.findOne({ email });
@@ -71,8 +71,16 @@ app.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(password, user.password);
 
             if (passwordMatch) {
-                // Redirect to another page after successful login
-                res.redirect('/impact/index.html');
+                if (userType === 'user') {
+                    // Redirect user to the user dashboard
+                    res.redirect('/impact/index.html');
+                } else if (userType === 'admin') {
+                    // Redirect admin to the admin dashboard
+                    res.redirect('/admin-dashboard.html');
+                } else {
+                    // Handle invalid userType
+                    res.status(400).json({ message: 'Invalid userType' });
+                }
             } else {
                 res.status(401).json({ message: 'Password does not match' });
             }
@@ -83,6 +91,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Login error', error: error.message });
     }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
