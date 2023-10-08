@@ -171,41 +171,51 @@
     <script src="js.js"></script>
  
     <script>
-        import { useNavigate } from "react-router-dom";
-      
         document.addEventListener("DOMContentLoaded", function () {
-          // Get references to the radio buttons and the forms
-          const adminRadio = document.querySelector('input[name="userType"][value="admin"]');
-          const userRadio = document.querySelector('input[name="userType"][value="user"]');
-          const loginFormUser = document.querySelector(".sign-in-form.user");
-          const loginFormAdmin = document.querySelector(".sign-in-form.admin");
-      
-          // Add a submit event listener to the login form for users
-          loginFormUser.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Get the role of the user
-            const role = userRadio.checked ? "user" : "admin";
-      
-            // Redirect the user to the appropriate page based on their role
-            const navigate = useNavigate();
-            navigate(role === "user" ? "/impact/index.html" : "/admin");
-          });
-      
-          // Add a submit event listener to the login form for admins
-          loginFormAdmin.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Get the role of the user
-            const role = adminRadio.checked ? "admin" : "user";
-      
-            // Redirect the user to the appropriate page based on their role
-            const navigate = useNavigate();
-            navigate(role === "admin" ? "/admin" : "/serviceprovider/index.html");
-          });
+            // Get references to the radio buttons and the forms
+            const adminRadio = document.querySelector('input[name="userType"][value="admin"]');
+            const userRadio = document.querySelector('input[name="userType"][value="user"]');
+            const loginFormUser = document.querySelector(".sign-in-form.user");
+            const loginFormAdmin = document.querySelector(".sign-in-form.admin");
+            const serviceDropdown = document.getElementById("service-dropdown");
+            const licenseNumberField = document.querySelector(".input-field input[name='licenseNumber']");
+    
+            // Function to show/hide the additional fields based on radio button selection
+            function toggleFields() {
+                if (adminRadio.checked) {
+                    serviceDropdown.style.display = "block";
+                    licenseNumberField.parentElement.style.display = "block"; // Show the parent container
+                    licenseNumberField.removeAttribute("disabled"); // Remove the disabled attribute
+                } else {
+                    serviceDropdown.style.display = "none";
+                    licenseNumberField.parentElement.style.display = "none"; // Hide the parent container
+                    licenseNumberField.setAttribute("disabled", "disabled"); // Add the disabled attribute
+                }
+            }
+    
+            // Add event listeners to both radio buttons
+            adminRadio.addEventListener("change", toggleFields);
+            userRadio.addEventListener("change", toggleFields);
+    
+            // Add a submit event listener to the login form for users
+            loginFormUser.addEventListener("submit", function (e) {
+                // Prevent the default form submission
+                e.preventDefault();
+    
+                // Redirect the user to the appropriate page based on their role
+                window.location.href = userRadio.checked ? "/impact/index.html" : "/admin";
+            });
+    
+            // Add a submit event listener to the login form for admins
+            loginFormAdmin.addEventListener("submit", function (e) {
+                // Prevent the default form submission
+                e.preventDefault();
+    
+                // Redirect the user to the appropriate page based on their role
+                window.location.href = adminRadio.checked ? "/admin" : "/serviceprovider/index.html";
+            });
         });
-      </script>
+    </script>
+    
 </body>
 </html>
