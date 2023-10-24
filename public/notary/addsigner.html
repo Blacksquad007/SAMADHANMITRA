@@ -114,8 +114,9 @@
         </div>
         <link rel="stylesheet" href="./keysigner_files/keysigner.css">
         <div class="container">
-            <img src="/121.jpeg" class="image">
+            <img src="121.jpeg" class="image">
             <h1>Add Signatory Information</h1>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
             <form action="/addsigner" method="post" id="signupForm" onsubmit="return validateForm()">
                 <div class="form-group">
@@ -168,8 +169,7 @@
                   <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
                   <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
                   <div class="popup-buttons">
-                    <button type="button" class="submit-button" onclick="saveKeySignatoryAndAddSignerInformation()">CONFIRM</button>
-
+                    <button type="button" class="submit-button" onclick="confirmaddSignatory()">CONFIRM</button>
                   </div>
                 </div>
               </div>
@@ -229,6 +229,32 @@
 }
 function closePopup() {
   document.querySelector("#keySignatoryPopup").style.display = "none";
+}
+async function confirmaddSignatory() {
+  // Get the key signatory information from the form elements
+  const firstName = document.querySelector("#firstName").value;
+  const middleName = document.querySelector("#middleName").value;
+  const lastName = document.querySelector("#lastName").value;
+  const email = document.querySelector("#email").value;
+  const phone = document.querySelector("#phone").value;
+  const aadhar = document.querySelector("#aadhar").value;
+
+
+  // Create a new KeySignatory object
+  const newaddSignatory = {
+    firstName,
+    middleName,
+    lastName,
+    email,
+    phone,
+    aadhar,
+  };
+
+  // Make an HTTP request to the Node.js server to save the key signatory information to the database
+  await axios.post("/save-add-signatory", newaddSignatory);
+
+  // Display a success message to the user
+  alert("add Signatory Confirmed!");
 }
 
 

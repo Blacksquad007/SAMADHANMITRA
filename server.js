@@ -2,10 +2,24 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const path = require('path');
+
 
 const app = express();
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 8000;
 
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,6 +38,7 @@ mongoose.connect(MONGODB_URI, {
 .catch((err) => {
   console.error('Error connecting to MongoDB:', err);
 });
+
 // Create a new model for the key signatory information
 const KeySignatory = mongoose.model('KeySignatory', {
   firstName: String,
@@ -35,35 +50,98 @@ const KeySignatory = mongoose.model('KeySignatory', {
   dob: Date,
   state: String,
   city: String,
-  pincode: String,
+  pincode: String, // Add a field to store file path
+});
+
+// Create a new route to handle the POST request with file uploads
+app.post('/save-key-signatory-file1', upload.single('idproof'), async (req, res) => {
+  try {
+    // Validate the required fields
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'idproof'];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        return res.status(400).json({ message: `Missing required field: ${field}` });
+      }
+    }
+
+    // Validate the uploaded file
+    if (!req.file) {
+      return res.status(400).json({ message: 'Missing uploaded file: idproof' });
+    }
+
+    // Get the key signatory information from the POST request body
+    const keySignatory = req.body;
+
+    // Get the file path for the uploaded file
+    const filePath = req.file.path;
+
+    // Create a new key signatory record
+    const newKeySignatory = new KeySignatory({
+      firstName: keySignatory.firstName,
+      middleName: keySignatory.middleName,
+      lastName: keySignatory.lastName,
+      email: keySignatory.email,
+      phone: keySignatory.phone,
+      aadhar: keySignatory.aadhar,
+      dob: keySignatory.dob,
+      state: keySignatory.state,
+      city: keySignatory.city,
+      pincode: keySignatory.pincode,
+      filePath: filePath, // Store the file path in the database
+    });
+
+    // Save the key signatory record to the database
+    await newKeySignatory.save();
+
+    // Send a success response to the client
+    res.status(201).json({ message: 'Key Signatory Saved!' });
+  } catch (error) {
+    console.error('Error saving key signatory:', error);
+    let statusCode = 500;
+    let message = 'Error saving key signatory.';
+    if (error.name === 'ValidationError') {
+      statusCode = 400;
+      message = 'Invalid key signatory data.';
+    } else if (error.name === 'MulterError') {
+      statusCode = 400;
+      message = 'Error uploading file.';
+    }
+    res.status(statusCode).json({ message });
+  }
+});
+
+
+const AddSignatory= mongoose.model('AddSignatory', {
+  firstName: String,
+  middleName: String,
+  lastName: String,
+  email: String,
+  phone: String,
+  aadhar: String,
 });
 
 // Create a new route to handle the POST request
-app.post('/save-key-signatory', async (req, res) => {
-  // Get the key signatory information from the POST request body
-  const keySignatory = req.body;
+app.post('/save-Add-signatory', async (req, res) => {
+  // Get the Add signatory information from the POST request body
+  const addSignatory = req.body;
+  
 
-  // Create a new key signatory record from the POST request body
-  const newKeySignatory = new KeySignatory({
-    firstName: keySignatory.firstName,
-    middleName: keySignatory.middleName,
-    lastName: keySignatory.lastName,
-    email: keySignatory.email,
-    phone: keySignatory.phone,
-    aadhar: keySignatory.aadhar,
-    dob: keySignatory.dob,
-    state: keySignatory.state,
-    city: keySignatory.city,
-    pincode: keySignatory.pincode,
+  // Create a new add signatory record from the POST request body
+  const newAddSignatory = new AddSignatory({
+    firstName: addSignatory.firstName,
+    middleName: addSignatory.middleName,
+    lastName: addSignatory.lastName,
+    email: addSignatory.email,
+    phone: addSignatory.phone,
+    aadhar: addSignatory.aadhar,
   });
 
-  // Save the key signatory record to the database
-  await newKeySignatory.save();
+  // Save the add signatory record to the database
+  await newAddSignatory.save();
 
   // Send a success response to the client
-  res.status(201).json({ message: 'Key Signatory Saved!' });
+  res.status(201).json({ message: 'Add Signatory Saved!' });
 });
-
 const User = mongoose.model('User', {
   firstName: String,
   lastName: String,

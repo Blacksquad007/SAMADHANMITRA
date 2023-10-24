@@ -127,10 +127,11 @@
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-                <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return showKeySignatoryPopup();">
+                <form action="/save-key-signatory" method="post" enctype="multipart/form-data" onsubmit="return showKeySignatoryPopup();">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
+
                     </div>
                     <div class="form-group">
                         <label for="middleName">Middle Name</label>
@@ -176,10 +177,6 @@
                         <label for="pincode">Pincode:</label>
                         <input type="text" id="pincode" name="pincode" placeholder="pincode" required pattern="\d{6}">
                     </div>
-                    <div class="form-group">
-                      <label for="idproof1">signatory:</label>
-                      <input type="file" name="idproof1" id="idproof1">
-                  </div>
                     <div class="form-group">
                         <label for="idproof">Id Proof:</label>
                         <input type="file" name="idproof" id="idproof">
@@ -238,14 +235,14 @@ document.getElementById('state').addEventListener('change', function () {
 
 // Validate the form data and show the popup
 function showKeySignatoryPopup() {
-  const firstName = document.querySelector("#firstName").value;
+    const firstName = document.querySelector("#firstName").value;
+console.log("First Name:", firstName);
   const middleName = document.querySelector("#middleName").value;
   const lastName = document.querySelector("#lastName").value;
   const email = document.querySelector("#email").value;
   const phone = document.querySelector("#phone").value;
   const aadhar = document.querySelector("#aadhar").value;
   const pincode = document.querySelector("#pincode").value;
-      const idproof1 = document.querySelector("#idproof1").value;
       const idproof = document.querySelector("#idproof").value;
   
 
@@ -293,10 +290,6 @@ function showKeySignatoryPopup() {
     alert("Please select a City.");
     return;
   }
-  if (idproof1=== "") {
-    alert("Please upload signature jpg / pdf");
-    return;
-  }
   if (idproof === "") {
     alert("Please upload idproof eg: Aadhaar / Driving Licence / Passport / Pan Card");
     return;
@@ -328,7 +321,6 @@ function closePopup() {
 
 // Confirm the key signatory
 async function confirmKeySignatory() {
-  // Get the key signatory information from the form elements
   const firstName = document.querySelector("#firstName").value;
   const middleName = document.querySelector("#middleName").value;
   const lastName = document.querySelector("#lastName").value;
@@ -340,7 +332,7 @@ async function confirmKeySignatory() {
   const city = document.querySelector("#city").value;
   const pincode = document.querySelector("#pincode").value;
 
-  // Create a new KeySignatory object
+  // Create a new object to store the key signatory information
   const newKeySignatory = {
     firstName,
     middleName,
@@ -354,8 +346,20 @@ async function confirmKeySignatory() {
     pincode,
   };
 
-  // Make an HTTP request to the Node.js server to save the key signatory information to the database
-  await axios.post("/save-key-signatory", newKeySignatory);
+  // Get the file input
+  const idproofFile = document.querySelector("#idproof").files[0];
+
+  // Create a FormData object to send the file
+  const formData = new FormData();
+  formData.append("idproof", idproofFile);
+
+  // Make an HTTP request to the Node.js server to save the key signatory information and the file to the database
+  const response = await axios.post("/save-key-signatory-file1", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    params: newKeySignatory,
+  });
 
   // Display a success message to the user
   alert("Key Signatory Confirmed!");
