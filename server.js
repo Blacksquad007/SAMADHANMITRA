@@ -50,25 +50,20 @@ const KeySignatory = mongoose.model('KeySignatory', {
   dob: Date,
   state: String,
   city: String,
-  pincode: String, // Add a field to store file path
+  pincode: String,
+  filePath: String, // Add a field to store file path
 });
 
 // Create a new route to handle the POST request with file uploads
 app.post('/save-key-signatory-file1', upload.single('idproof'), async (req, res) => {
   try {
     // Validate the required fields
-    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'idproof'];
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone',];
     for (const field of requiredFields) {
       if (!req.body[field]) {
         return res.status(400).json({ message: `Missing required field: ${field}` });
       }
     }
-
-    // Validate the uploaded file
-    if (!req.file) {
-      return res.status(400).json({ message: 'Missing uploaded file: idproof' });
-    }
-
     // Get the key signatory information from the POST request body
     const keySignatory = req.body;
 
@@ -109,7 +104,6 @@ app.post('/save-key-signatory-file1', upload.single('idproof'), async (req, res)
     res.status(statusCode).json({ message });
   }
 });
-
 
 const AddSignatory= mongoose.model('AddSignatory', {
   firstName: String,

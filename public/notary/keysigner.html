@@ -131,7 +131,6 @@
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
-
                     </div>
                     <div class="form-group">
                         <label for="middleName">Middle Name</label>
@@ -161,6 +160,7 @@
                         <label for="state">State:</label>
                         <select name="state" id="state" required class="form-control">
                             <option value="" disabled selected>Select a state</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                             <!-- Add more state options here -->
@@ -178,7 +178,7 @@
                         <input type="text" id="pincode" name="pincode" placeholder="pincode" required pattern="\d{6}">
                     </div>
                     <div class="form-group">
-                        <label for="idproof">Id Proof:</label>
+                        <label for="idproof">Key Signer Id Proof:</label>
                         <input type="file" name="idproof" id="idproof">
                     </div>
                     <div class="form-group">
@@ -215,11 +215,50 @@ document.getElementById('state').addEventListener('change', function () {
 
   // Define city options for selected states
   var cityOptions = {
-    'Andhra Pradesh': ['Hyderabad', 'Visakhapatnam', 'Vijayawada', 'Guntur'],
-    'Arunachal Pradesh': ['Itanagar', 'Naharlagun']
-    // Add more states and corresponding cities here
-  };
-
+  'Tamil Nadu': [
+    'Chennai',
+    'Coimbatore',
+    'Madurai',
+    'Tiruchirappalli',
+    'Salem',
+    'Tirunelveli',
+    'Vellore',
+    'Erode',
+    'Thoothukudi',
+    'Dindigul',
+    'Thanjavur',
+    'Ranipet',
+    'Sivakasi',
+    'Karur',
+    'Ooty',
+    'Pollachi',
+    'Hosur',
+    'Nagercoil',
+    'Kancheepuram',
+    'Kumbakonam',
+    'Cuddalore',
+    'Ambur',
+    'Neyveli',
+    'Rajapalayam',
+    'Pudukkottai',
+    'Karaikudi',
+    'Sivagangai',
+    'Tenkasi',
+    'Tindivanam',
+    'Nagapattinam',
+    'Udhagamandalam (Ooty)',
+    'Pallavaram',
+    'Tiruvottiyur',
+    'Kovilpatti',
+    'Hosur',
+    'Nagercoil',
+    'Avadi',
+    'Poonamallee'
+  ],
+  'Andhra Pradesh': ['Hyderabad', 'Visakhapatnam', 'Vijayawada', 'Guntur'],
+  'Arunachal Pradesh': ['Itanagar', 'Naharlagun'],
+  // Add more states and corresponding cities here
+};
   // Populate city options based on the selected state
   if (cityOptions[state]) {
     cityOptions[state].forEach(function (city) {
@@ -235,8 +274,7 @@ document.getElementById('state').addEventListener('change', function () {
 
 // Validate the form data and show the popup
 function showKeySignatoryPopup() {
-    const firstName = document.querySelector("#firstName").value;
-console.log("First Name:", firstName);
+  const firstName = document.querySelector("#firstName").value;
   const middleName = document.querySelector("#middleName").value;
   const lastName = document.querySelector("#lastName").value;
   const email = document.querySelector("#email").value;
@@ -319,55 +357,62 @@ function closePopup() {
   document.querySelector("#keySignatoryPopup").style.display = "none";
 }
 
-// Confirm the key signatory
-async function confirmKeySignatory() {
-  const firstName = document.querySelector("#firstName").value;
-  const middleName = document.querySelector("#middleName").value;
-  const lastName = document.querySelector("#lastName").value;
-  const email = document.querySelector("#email").value;
-  const phone = document.querySelector("#phone").value;
-  const aadhar = document.querySelector("#aadhar").value;
-  const dob = document.querySelector("#dob").value;
-  const state = document.querySelector("#state").value;
-  const city = document.querySelector("#city").value;
-  const pincode = document.querySelector("#pincode").value;
 
-  // Create a new object to store the key signatory information
-  const newKeySignatory = {
-    firstName,
-    middleName,
-    lastName,
-    email,
-    phone,
-    aadhar,
-    dob,
-    state,
-    city,
-    pincode,
-  };
+    async function confirmKeySignatory() {
+        const firstName = document.querySelector("#firstName").value;
+const middleName = document.querySelector("#middleName").value;
+const lastName = document.querySelector("#lastName").value;
+const email = document.querySelector("#email").value;
+const phone = document.querySelector("#phone").value;
+const aadhar = document.querySelector("#aadhar").value;
+const dob = document.querySelector("#dob").value;
+const state = document.querySelector("#state").value;
+const city = document.querySelector("#city").value;
+const pincode = document.querySelector("#pincode").value;
+const idproofFile = document.querySelector("#idproof").files[0];
 
-  // Get the file input
-  const idproofFile = document.querySelector("#idproof").files[0];
+// Validate the required fields
+if (!firstName || !lastName || !email || !idproofFile) {
+  alert("Please fill in all the required fields.");
+  return;
+}
 
-  // Create a FormData object to send the file
-  const formData = new FormData();
-  formData.append("idproof", idproofFile);
+// Create a FormData object to send both text and file data
+const formData = new FormData();
+formData.append("firstName", firstName);
+formData.append("middleName", middleName);
+formData.append("lastName", lastName);
+formData.append("email", email);
+formData.append("phone", phone);
+formData.append("aadhar", aadhar);
+formData.append("dob", dob);
+formData.append("state", state);
+formData.append("city", city);
+formData.append("pincode", pincode);
+formData.append("idproof", idproofFile);
 
-  // Make an HTTP request to the Node.js server to save the key signatory information and the file to the database
+try {
   const response = await axios.post("/save-key-signatory-file1", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-    params: newKeySignatory,
   });
 
   // Display a success message to the user
   alert("Key Signatory Confirmed!");
+
+  // Redirect to the notary/emailv.html page
+  window.location.href = "/notary/emailv.html";
+} catch (error) {
+  // Handle the error
+  alert(error.message);
 }
 
 // Add another signer
 function addAnotherSigner() {
   window.location.href = "/notary/addsigner.html";
+}
+
 }
  </script>
     </main>
