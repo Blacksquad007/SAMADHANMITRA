@@ -115,84 +115,123 @@
         <link rel="stylesheet" href="./keysigner_files/keysigner.css">
         <div class="container">
             <img src="/121.jpeg" class="image">
-            <h2><center>Add Signatory Information</center></h2>
-            <div class="signup-form">
-                <form action="/submit-form" method="post" id="signupForm" onsubmit="return validateForm()">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="middleName">Middle Name</label>
-                        <input type="text" id="middleName" name="middleName" placeholder="Your Middle Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="aadhar">Aadhar Number</label>
-                        <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required>
-                    </div>
-                    <!-- Submit button triggers the display of the popup -->
-                    <button type="button" class="submit-button" onclick="showKeySignatoryPopup()">Submit</button>
-                </form>
-            </div>
-        </div>
-        <!-- Popup for displaying key signatory details -->
-        <div class="popup" id="keySignatoryPopup">
-            <div class="popup-content">
-                <span class="close-button" onclick="closePopup()">&times;</span>
-                <h2>Add Signatory Details</h2>
-                <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
-                <p><strong>Middle Name:</strong> <span id="popupMiddleName"></span></p>
-                <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
-                <p><strong>Email:</strong> <span id="popupEmail"></span></p>
-                <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
-                <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
+            <h1>Add Signatory Information</h1>
 
-                
-                <div class="popup-buttons">
-                    <button type="button" class="submit-button" onclick="addAnotherSigner()">Continue</button>
+            <form action="/addsigner" method="post" id="signupForm" onsubmit="return validateForm()">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
                 </div>
+                <div class="form-group">
+                  <label for="middleName">Middle Name</label>
+                  <input type="text" id="middleName" name="middleName" placeholder="Your Middle Name">
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Your Last Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                  <label for="aadhar">Aadhar Number</label>
+                  <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required pattern="\d{12}">
+                </div>
+              <div class="form-group">
+                <label for="idproof1">signatory:</label>
+                <input type="file" name="idproof1" id="idproof1">
             </div>
-        </div>
-        <script>
-            function showKeySignatoryPopup() {
-                // Get input values
-                var firstName = document.getElementById('firstName').value;
-                var middleName = document.getElementById('middleName').value;
-                var lastName = document.getElementById('lastName').value;
-                var email = document.getElementById('email').value;
-                var phone = document.getElementById('phone').value;
-                var aadhar = document.getElementById('aadhar').value;
+            <div class="form-group">
+              <label for="idproof">Id Proof:</label>
+              <input type="file" name="idproof" id="idproof">
+          </div> 
+                <div class="form-group">
+                  <button type="button" class="submit-button" onclick="showKeySignatoryPopup()">Submit</button>
+                </div>
+              </form>
+              
 
-                // Set popup content
-                document.getElementById('popupFirstName').textContent = firstName;
-                document.getElementById('popupMiddleName').textContent = middleName;
-                document.getElementById('popupLastName').textContent = lastName;
-                document.getElementById('popupEmail').textContent = email;
-                document.getElementById('popupPhone').textContent = phone;
-                document.getElementById('popupAadhar').textContent = aadhar;
+            <!-- Popup for displaying key signatory details -->
+            <div class="popup" id="keySignatoryPopup">
+                <div class="popup-content">
+                  <span class="close-button" onclick="closePopup()">&times;</span>
+                  <h2>Add Signatory Details</h2>
+                  <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+                  <p><strong>Middle Name:</strong> <span id="popupMiddleName"></span></p>
+                  <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+                  <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+                  <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
+                  <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
+                  <div class="popup-buttons">
+                    <button type="button" class="submit-button" onclick="saveKeySignatoryAndAddSignerInformation()">CONFIRM</button>
 
-                // Show the popup
-                document.getElementById('keySignatoryPopup').style.display = 'block';
-            }
+                  </div>
+                </div>
+              </div>
+            <script>
+        function showKeySignatoryPopup() {
+  // Get input values
+  var firstName = document.getElementById('firstName').value;
+  var middleName = document.getElementById('middleName').value;
+  var lastName = document.getElementById('lastName').value;
+  var email = document.getElementById('email').value;
+  var phone = document.getElementById('phone').value;
+  var aadhar = document.getElementById('aadhar').value;
+  const idproof1 = document.querySelector("#idproof1").value;
+      const idproof = document.querySelector("#idproof").value;
+  
+
+  // Validate the form data
+  if (firstName == '') {
+    alert('Please enter your first name.');
+    return false;
+  }
+  if (lastName == '') {
+    alert('Please enter your last name.');
+    return false;
+  }
+  if (email == '') {
+    alert('Please enter your email address.');
+    return false;
+  }
+  if (phone == '') {
+    alert('Please enter your phone number.');
+    return false;
+  }
+  if (aadhar == '') {
+    alert('Please enter your Aadhar number.');
+    return false;
+  }
+  if (idproof1=== "") {
+    alert("Please upload signature jpg / pdf");
+    return;
+  }
+  if (idproof === "") {
+    alert("Please upload idproof eg: Aadhaar / Driving Licence / Passport / Pan Card");
+    return;
+  }
+
+  // Set popup content
+  document.getElementById('popupFirstName').textContent = firstName;
+  document.getElementById('popupMiddleName').textContent = middleName;
+  document.getElementById('popupLastName').textContent = lastName;
+  document.getElementById('popupEmail').textContent = email;
+  document.getElementById('popupPhone').textContent = phone;
+  document.getElementById('popupAadhar').textContent = aadhar;
+
+  // Show the popup
+  document.getElementById('keySignatoryPopup').style.display = 'block';
+}
+function closePopup() {
+  document.querySelector("#keySignatoryPopup").style.display = "none";
+}
 
 
-            function addAnotherSigner() {
-              window.location.href = 'emailv.html';
-                closePopup();
-            }
-        </script>
-    </main>
-</body>
-</html>
+            </script>
+            </body>
+            </html>

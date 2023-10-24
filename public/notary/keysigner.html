@@ -115,9 +115,17 @@
         <link rel="stylesheet" href="./keysigner_files/keysigner.css">
         <div class="container">
             <img src="121.jpeg" class="image">
-            <h2><center>Key Signatory Information</center></h2>
-            <div class="signup-form">
-                <form action="/submit-form" method="post" id="signupForm" onsubmit="return validateForm()">
+            <!DOCTYPE html>
+            <html>
+            
+            <head>
+                <title>Key Signatory Information</title>
+            </head>
+            
+            <body>
+                <h2>Key Signatory Information</h2>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <form action="/keysigner" method="post" id="signupForm">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
@@ -139,79 +147,194 @@
                         <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
                     </div>
                     <div class="form-group">
-                        <label for="aadhar">Aadhar Number</label>
-                        <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required>
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" placeholder="DOB" required class="form-control">
                     </div>
-                    <!-- Submit button triggers the display of the popup -->
-                    <button type="button" class="submit-button" onclick="showKeySignatoryPopup()">Submit</button>
+                    <div class="form-group">
+                        <label for="aadhar">Aadhar Number</label>
+                        <input type="text" id="aadhar" name="aadhar" placeholder="Your Aadhar Number" required pattern="\d{12}">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <select name="state" id="state" required class="form-control">
+                            <option value="" disabled selected>Select a state</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <!-- Add more state options here -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <select name="city" id="city" required class="form-control">
+                            <option value="" disabled selected>Select a city</option>
+                            <!-- City options will be populated based on the selected state using JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode:</label>
+                        <input type="text" id="pincode" name="pincode" placeholder="pincode" required pattern="\d{6}">
+                    </div>
+                    <div class="form-group">
+                      <label for="idproof1">signatory:</label>
+                      <input type="file" name="idproof1" id="idproof1">
+                  </div>
+                    <div class="form-group">
+                        <label for="idproof">Id Proof:</label>
+                        <input type="file" name="idproof" id="idproof">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="submit-button" onclick="showKeySignatoryPopup()">Submit</button>
+                    </div>
                 </form>
-            </div>
-        </div>
-        <!-- Popup for displaying key signatory details -->
-        <div class="popup" id="keySignatoryPopup">
-            <div class="popup-content">
-                <span class="close-button" onclick="closePopup()">&times;</span>
-                <h2>Key Signatory Details</h2>
-                <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
-                <p><strong>Middle Name:</strong> <span id="popupMiddleName"></span></p>
-                <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
-                <p><strong>Email:</strong> <span id="popupEmail"></span></p>
-                <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
-                <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
-
-                
-                <div class="popup-buttons">
-                    <button type="button" class="submit-button" onclick="closePopup()">Continue</button>
-                    <button type="button" class="submit-button" onclick="addAnotherSigner()">Add Another Signer</button>
+                <div class="popup" id="keySignatoryPopup">
+                    <div class="popup-content">
+                        <span class="close-button" onclick="closePopup()">&times;</span>
+                        <h2>Key Signatory Details</h2>
+                        <p><strong>First Name:</strong> <span id="popupFirstName"></span></p>
+                        <p><strong>Middle Name:</strong> <span id="popupMiddleName"></span></p>
+                        <p><strong>Last Name:</strong> <span id="popupLastName"></span></p>
+                        <p><strong>Email:</strong> <span id="popupEmail"></span></p>
+                        <p><strong>Phone Number:</strong> <span id="popupPhone"></span></p>
+                        <p><strong>Date of Birth:</strong> <span id="popupDateOfBirth"></span></p>
+                        <p><strong>Aadhar Number:</strong> <span id="popupAadhar"></span></p>
+                        <p><strong>State:</strong> <span id="popupState"></span></p>
+                        <p><strong>City:</strong> <span id="popupCity"></span></p>
+                        <p><strong>pincode:</strong> <span id="popuPincode"></span></p>
+                        <div class="popup-buttons">
+                            <button type="button" class="submit-button" onclick="confirmKeySignatory()">CONFIRM</button>
+                            <button type="button" class="submit-button" onclick="addAnotherSigner()">Add Another Signer</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <script>
-            function validateForm() {
-                var firstName = document.getElementById('firstName').value;
-                var lastName = document.getElementById('lastName').value;
-                var email = document.getElementById('email').value;
-                var phone = document.getElementById('phone').value;
-                var aadhar = document.getElementById('aadhar').value;
+            
+                <script>
+                  // Populate the city options based on the selected state
+document.getElementById('state').addEventListener('change', function () {
+  var state = this.value;
+  var citySelect = document.getElementById('city');
+  citySelect.innerHTML = ''; // Clear existing options
 
-                // Check if required fields are empty
-                if (firstName.trim() === "" || lastName.trim() === "" || email.trim() === "" || phone.trim() === "" || aadhar.trim() === "") {
-                    alert("Please fill in all required fields.");
-                    return false;
-                }
+  // Define city options for selected states
+  var cityOptions = {
+    'Andhra Pradesh': ['Hyderabad', 'Visakhapatnam', 'Vijayawada', 'Guntur'],
+    'Arunachal Pradesh': ['Itanagar', 'Naharlagun']
+    // Add more states and corresponding cities here
+  };
 
-                return true;
-            }
+  // Populate city options based on the selected state
+  if (cityOptions[state]) {
+    cityOptions[state].forEach(function (city) {
+      var option = document.createElement('option');
+      option.value = city;
+      option.textContent = city;
+      citySelect.appendChild(option);
+    });
+  }
+});
 
-            function showKeySignatoryPopup() {
-                // Get input values
-                var firstName = document.getElementById('firstName').value;
-                var middleName = document.getElementById('middleName').value;
-                var lastName = document.getElementById('lastName').value;
-                var email = document.getElementById('email').value;
-                var phone = document.getElementById('phone').value;
-                var aadhar = document.getElementById('aadhar').value;
 
-                // Set popup content
-                document.getElementById('popupFirstName').textContent = firstName;
-                document.getElementById('popupMiddleName').textContent = middleName;
-                document.getElementById('popupLastName').textContent = lastName;
-                document.getElementById('popupEmail').textContent = email;
-                document.getElementById('popupPhone').textContent = phone;
-                document.getElementById('popupAadhar').textContent = aadhar;
 
-                // Show the popup
-                document.getElementById('keySignatoryPopup').style.display = 'block';
-            }
+// Validate the form data and show the popup
+function showKeySignatoryPopup() {
+  const firstName = document.querySelector("#firstName").value;
+  const middleName = document.querySelector("#middleName").value;
+  const lastName = document.querySelector("#lastName").value;
+  const email = document.querySelector("#email").value;
+  const phone = document.querySelector("#phone").value;
+  const aadhar = document.querySelector("#aadhar").value;
+  const pincode = document.querySelector("#pincode").value;
+      const idproof1 = document.querySelector("#idproof1").value;
+      const idproof = document.querySelector("#idproof").value;
+  
 
-            function closePopup() {
-                window.location.href = 'emailv.html';
-            }
+  // Additional details
+  const dob = document.querySelector("#dob").value;
+  const state = document.querySelector("#state").value;
+  const cityElement = document.querySelector("#city"); // Check if the city element is null
+  const city = cityElement?.value;
+  
 
-            function addAnotherSigner() {
-                // Redirect to the "addsigner.html" page
-                window.location.href = '/notary/addsigner.html';
-            }
+  // Validate the required fields
+  if (firstName === "" || lastName === ""  ) {
+    alert("Please fill Your Name");
+    return;
+  }
+  if (email=== "") {
+    alert("Please enter your email");
+    return;
+  }
+  if (pincode === "") {
+    alert("Please enter your pincode");
+    return;
+  }
+
+ 
+  if (aadhar=== "") {
+    alert("Please enter your 12 digits aadhar no");
+    return;
+  }
+
+  // Validate Date of Birth
+  if (dob === "") {
+    alert("Please enter your Date of Birth.");
+    return;
+  }
+
+  // Validate State
+  if (state === "") {
+    alert("Please select a State.");
+    return;
+  }
+
+  // Validate City
+  if (city === "") {
+    alert("Please select a City.");
+    return;
+  }
+  if (idproof1=== "") {
+    alert("Please upload signature jpg / pdf");
+    return;
+  }
+  if (idproof === "") {
+    alert("Please upload idproof eg: Aadhaar / Driving Licence / Passport / Pan Card");
+    return;
+  }
+
+
+  // Set popup content
+  document.querySelector("#popupFirstName").textContent = firstName;
+  document.querySelector("#popupMiddleName").textContent = middleName;
+  document.querySelector("#popupLastName").textContent = lastName;
+  document.querySelector("#popupEmail").textContent = email;
+  document.querySelector("#popupPhone").textContent = phone;
+  document.querySelector("#popupAadhar").textContent = aadhar;
+
+  // Additional details in the popup
+  document.querySelector("#popupDateOfBirth").textContent = dob;
+  document.querySelector("#popupState").textContent = state;
+  document.querySelector("#popupCity").textContent = city;
+
+
+  // Show the popup
+  document.querySelector("#keySignatoryPopup").style.display = "block";
+}
+
+// Close the popup
+function closePopup() {
+  document.querySelector("#keySignatoryPopup").style.display = "none";
+}
+
+// Confirm the key signatory
+function confirmKeySignatory() {
+  alert("Key Signatory Confirmed!");
+}
+
+// Add another signer
+function addAnotherSigner() {
+  window.location.href = "/notary/addsigner.html";
+}
+
+            
         </script>
     </main>
 </body>

@@ -2,117 +2,164 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-const app = express();
-const PORT = process.env.PORT || 7000;
 
+
+
+const app = express();
+const PORT = process.env.PORT || 9000;
+
+// Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('impact'));
+app.use(express.static('public'));
 
-// Set up MongoDB
+// MongoDB Connection
 const MONGODB_URI = 'mongodb+srv://shrivignesh:sih1286@atlascluster.pv8ypti.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.error('Error connecting to MongoDB:', err);
-    });
 
-// Define User model
-const User = mongoose.model('User', {
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch((err) => {
+  console.error('Error connecting to MongoDB:', err);
+});
+
+// MongoDB Models
+// MongoDB Models
+const KeySignatorySchema = new mongoose.Schema({
     firstName: String,
+    middleName: String,
     lastName: String,
     email: String,
     phone: String,
-    password: String,
-    isVerified: Boolean,
-    verificationCode: String,
+    aadhar: String,
+    userId: String,
+  });
+  
+  const KeySignatory = mongoose.model('KeySignatory', KeySignatorySchema);
+  
+  // Function to save key signatory information
+  async function saveKeySignatoryInformation({
+    firstName,
+    middleName,
+    lastName,
+    email,
+    phone,
+    aadhar,
+    userId,
+  }) {
+    // Create a new KeySignatory object
+    const newKeySignatoryDocument = new KeySignatory({
+      firstName,
+      middleName,
+      lastName,
+      email,
+      phone,
+      aadhar,
+      userId,
+    });
+  
+    // Save the KeySignatory object to MongoDB
+    await newKeySignatoryDocument.save();
+  }
+  
+  // Route to handle the POST request from the keysigner.html file
+  app.post('/saveKeySignatoryInformation', async (req, res) => {
+    // Get the key signatory information from the request body
+    const { firstName, middleName, lastName, email, phone, aadhar, userId } = req.body;
+  
+    // Save the key signatory information
+    await saveKeySignatoryInformation({
+      firstName,
+      middleName,
+      lastName,
+      email,
+      phone,
+      aadhar,
+      userId,
+    });
+  
+    // Send a success response
+    res.sendStatus(200);
+  });
+  
+const User = mongoose.model('User', {
+  firstName: String,
+  lastName: String,
+  email: String,
+  phone: String,
+  password: String,
 });
 
-// Nodemailer configuration
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'samadhanmitra@gmail.com',
-        pass: 'Samadhanmitra@47',
-    },
+const KeySignatoryAndAddSigner = mongoose.model('KeySignatoryAndAddSigner', {
+  firstName: String,
+  middleName: String,
+  lastName: String,
+  email: String,
+  phone: String,
+  aadhar: String,
+  userId: String,
 });
 
-app.use(express.static('public'));
+// Routes
+app.post('/signup', async (req, res) => {
+  const { firstName, lastName, email, phone, password } = req.body;
 
-// Send verification OTP to email
-app.post('/send-verification-otp', async (req, res) => {
-    const { email } = req.body;
+  try {
+    const existingUser = await User.findOne({ email });
 
-    try {
-        const user = await User.findOne({ email });
+    if (existingUser) {
+      res.status(409).json({ message: 'User with this email already exists' });
+    } else {
+      const hashedPassword = await bcrypt.hash(password, 10);
 
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
-            return;
-        }
+      const user = new User({
+        firstName,
+        lastName,
+        email,
+        phone,
+        password: hashedPassword,
+      });
 
-        // Generate a random verification code (e.g., a 6-digit code)
-        const verificationCode = Math.floor(100000 + Math.random() * 900000);
+      await user.save();
 
-        const mailOptions = {
-            from: 'your_email@gmail.com',
-            to: email,
-            subject: 'Email Verification OTP',
-            text: `Your OTP for email verification is: ${verificationCode}`,
-        };
-
-        await transporter.sendMail(mailOptions);
-
-        // Update the user's verification code
-        user.verificationCode = verificationCode;
-        await user.save();
-
-        res.status(200).json({ message: 'Verification OTP sent' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error sending verification OTP', error: error.message });
+      res.status(201).json({ message: 'Registration successful' });
     }
+  } catch (error) {
+    res.status(500).json({ message: 'Registration error', error: error.message });
+  }
 });
 
-// Verify OTP and allow login
-app.post('/verify-otp-and-login', async (req, res) => {
-    const { email, otp, password } = req.body;
+app.post('/login', async (req, res) => {
+  const { email, password, userType } = req.body;
 
-    try {
-        const user = await User.findOne({ email });
+  try {
+    const user = await User.findOne({ email });
 
-        if (!user) {
-            res.status(404).json({ message: 'User not found' });
-            return;
-        }
+    if (user) {
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-        if (user.verificationCode !== otp) {
-            res.status(401).json({ message: 'Invalid OTP' });
-            return;
-        }
-
-        // Mark the user as verified
-        user.isVerified = true;
-        await user.save();
-
-        // Perform the login process (e.g., check password and redirect)
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if (passwordMatch) {
-            res.status(200).json({ message: 'Login successful' });
+      if (passwordMatch) {
+        if (userType === 'user') {
+          res.redirect('/impact/index.html');
+        } else if (userType === 'admin') {
+          res.redirect('/impact/sindex.html');
         } else {
-            res.status(401).json({ message: 'Password does not match' });
+          res.status(400).json({ message: 'Invalid userType' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error verifying OTP and login', error: error.message });
+      } else {
+        res.status(401).json({ message: 'Password does not match' });
+      }
+    } else {
+      res.status(404).json({ message: 'User not found' });
     }
+  } catch (error) {
+    res.status(500).json({ message: 'Login error', error: error.message });
+  }
 });
-
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

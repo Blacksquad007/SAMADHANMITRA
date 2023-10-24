@@ -15,16 +15,16 @@
         <div class="container">
             <div class="forms-container">
                 <div class="signin-signup">
-                    <form action="/login" method="post" class="sign-in-form user-form">
+                    <form action="/login" method="post" class="sign-in-form">
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
                             <div class="radio-group">
                                 <label for="user-radio-login">
-                                    <input type="radio" name="userType" value="user" id="user-radio-login" checked />
+                                    <input type="checkbox" name="userType" value="user" id="user-radio-login" checked />
                                     <span>User</span>
                                 </label>
                                 <label for="admin-radio-login">
-                                    <input type="radio" name="userType" value="admin" id="admin-radio-login" />
+                                    <input type="checkbox" name="userType" value="admin" id="admin-radio-login" />
                                     <span>Admin</span>
                                 </label>
                             </div>
@@ -37,7 +37,6 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" placeholder="Password" name="password" required />
                         </div>
-                        
                         <div class="input-field">
                             <i class="fas fa-briefcase"></i>
                             <input type="text" placeholder="Legal License Number" name="licenseNumber" />
@@ -46,7 +45,7 @@
                         <!-- This is the "Login" button for the User -->
                         <input type="submit" value="Login" class="btn solid" id="login-user" />
                         <!-- This is the "Login2" button for the Admin -->
-                        <input type="submit" value="Login" class="btn solid" id="login-admin" style="display: none;" />
+                        <input type="submit" value="Login2" class="btn solid" id="login-admin" style="display: none;" />
                         
                         <p class="social-text">Or Sign in with social platforms</p>
                         <div class="social-media">
@@ -65,7 +64,7 @@
                         </div>
                     </form>
 
-                    <form action="/signup" method="post" class="sign-up-form user-form">
+                    <form action="/signup" method="post" class="sign-up-form">
                         <h2 class="title">Sign up</h2>
                         <div class="input-field">
                             <div class="radio-group">
@@ -92,9 +91,8 @@
                             <i class="fas fa-phone"></i>
                             <input type="tel" placeholder="Phone Number" name="phoneNumber" required />
                         </div>
-                        
-                        <!-- Additional fields for Admin -->
-                        <div class="input-field" id="service-dropdown">
+                        <!-- End of additional fields for Admin -->
+                        <div class="input-field" id="service-dropdown" style="display: none;">
                             <select name="service">
                                 <option value="notary">Notary</option>
                                 <option value="advocate">Advocate</option>
@@ -171,82 +169,53 @@
     </div>
 
     <script src="js.js"></script>
+ 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-          // Get references to the radio buttons and the forms
-          const adminRadio = document.querySelector('input[name="userType"][value="admin"]');
-          const userRadio = document.querySelector('input[name="userType"][value="user"]');
-          const signUpFormUser = document.querySelector(".sign-up-form.user-form");
-          const signUpFormAdmin = document.querySelector(".sign-up-form.admin-form");
-          const signInFormUser = document.querySelector(".sign-in-form.user-form");
-          const signInFormAdmin = document.querySelector(".sign-in-form.admin-form");
-          const serviceDropdown = document.getElementById("service-dropdown");
-          const licenseNumberField = document.querySelector(".input-field input[name='licenseNumber']");
-          const signupAdminButton = document.getElementById("signup-admin");
-      
-          // Hide the dropdown menu and license number field by default
-          serviceDropdown.style.display = "none";
-          licenseNumberField.parentElement.style.display = "none";
-      
-          // Add event listeners to both radio buttons
-          adminRadio.addEventListener("change", toggleFields);
-          userRadio.addEventListener("change", toggleFields);
-      
-          // Function to show/hide the dropdown menu and license number field based on radio button selection
-          function toggleFields() {
-            if (adminRadio.checked) {
-              // Show the dropdown menu and license number field for admins
-              serviceDropdown.style.display = "block";
-              licenseNumberField.parentElement.style.display = "block";
-      
-              // Enable the license number field for admins
-              licenseNumberField.removeAttribute("disabled");
-            } else {
-              // Hide the dropdown menu and license number field for users
-              serviceDropdown.style.display = "none";
-              licenseNumberField.parentElement.style.display = "none";
-      
-              // Disable the license number field for users
-              licenseNumberField.setAttribute("disabled", "disabled");
+            // Get references to the radio buttons and the forms
+            const adminRadio = document.querySelector('input[name="userType"][value="admin"]');
+            const userRadio = document.querySelector('input[name="userType"][value="user"]');
+            const loginFormUser = document.querySelector(".sign-in-form.user");
+            const loginFormAdmin = document.querySelector(".sign-in-form.admin");
+            const serviceDropdown = document.getElementById("service-dropdown");
+            const licenseNumberField = document.querySelector(".input-field input[name='licenseNumber']");
+    
+            // Function to show/hide the additional fields based on radio button selection
+            function toggleFields() {
+                if (adminRadio.checked) {
+                    serviceDropdown.style.display = "block";
+                    licenseNumberField.parentElement.style.display = "block"; // Show the parent container
+                    licenseNumberField.removeAttribute("disabled"); // Remove the disabled attribute
+                } else {
+                    serviceDropdown.style.display = "none";
+                    licenseNumberField.parentElement.style.display = "none"; // Hide the parent container
+                    licenseNumberField.setAttribute("disabled", "disabled"); // Add the disabled attribute
+                }
             }
-          }
-      
-          // Add event listeners to both sign up forms
-          signUpFormUser.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Redirect the user to the appropriate page based on their role
-            window.location.href = userRadio.checked ? "/impact/index.html" : "/admin";
-          });
-      
-          signUpFormAdmin.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Redirect the user to the appropriate page based on their role
-            window.location.href = adminRadio.checked ? "/admin" : "/serviceprovider/index.html";
-          });
-      
-          // Add event listeners to both sign in forms
-          signInFormUser.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Redirect the user to the appropriate page based on their role
-            window.location.href = userRadio.checked ? "/impact/index.html" : "/admin";
-          });
-      
-          signInFormAdmin.addEventListener("submit", function (e) {
-            // Prevent the default form submission
-            e.preventDefault();
-      
-            // Redirect the user to the appropriate page based on their role
-            window.location.href = adminRadio.checked ? "/admin" : "/serviceprovider/index.html";
-          });
+    
+            // Add event listeners to both radio buttons
+            adminRadio.addEventListener("change", toggleFields);
+            userRadio.addEventListener("change", toggleFields);
+    
+            // Add a submit event listener to the login form for users
+            loginFormUser.addEventListener("submit", function (e) {
+                // Prevent the default form submission
+                e.preventDefault();
+    
+                // Redirect the user to the appropriate page based on their role
+                window.location.href = userRadio.checked ? "/impact/index.html" : "/admin";
+            });
+    
+            // Add a submit event listener to the login form for admins
+            loginFormAdmin.addEventListener("submit", function (e) {
+                // Prevent the default form submission
+                e.preventDefault();
+    
+                // Redirect the user to the appropriate page based on their role
+                window.location.href = adminRadio.checked ? "/admin" : "/serviceprovider/index.html";
+            });
         });
-      </script>
-      
-      
+    </script>
+    
 </body>
 </html>
