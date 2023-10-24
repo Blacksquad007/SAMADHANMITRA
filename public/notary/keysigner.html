@@ -125,7 +125,9 @@
             <body>
                 <h2>Key Signatory Information</h2>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <form action="/keysigner" method="post" id="signupForm">
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+                <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="return showKeySignatoryPopup();">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Your First Name" required>
@@ -325,7 +327,37 @@ function closePopup() {
 }
 
 // Confirm the key signatory
-function confirmKeySignatory() {
+async function confirmKeySignatory() {
+  // Get the key signatory information from the form elements
+  const firstName = document.querySelector("#firstName").value;
+  const middleName = document.querySelector("#middleName").value;
+  const lastName = document.querySelector("#lastName").value;
+  const email = document.querySelector("#email").value;
+  const phone = document.querySelector("#phone").value;
+  const aadhar = document.querySelector("#aadhar").value;
+  const dob = document.querySelector("#dob").value;
+  const state = document.querySelector("#state").value;
+  const city = document.querySelector("#city").value;
+  const pincode = document.querySelector("#pincode").value;
+
+  // Create a new KeySignatory object
+  const newKeySignatory = {
+    firstName,
+    middleName,
+    lastName,
+    email,
+    phone,
+    aadhar,
+    dob,
+    state,
+    city,
+    pincode,
+  };
+
+  // Make an HTTP request to the Node.js server to save the key signatory information to the database
+  await axios.post("/save-key-signatory", newKeySignatory);
+
+  // Display a success message to the user
   alert("Key Signatory Confirmed!");
 }
 
@@ -333,9 +365,7 @@ function confirmKeySignatory() {
 function addAnotherSigner() {
   window.location.href = "/notary/addsigner.html";
 }
-
-            
-        </script>
+ </script>
     </main>
 </body>
 </html>

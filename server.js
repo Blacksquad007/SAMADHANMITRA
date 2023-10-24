@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-
-
 const app = express();
 const PORT = process.env.PORT || 9000;
 
@@ -26,66 +24,46 @@ mongoose.connect(MONGODB_URI, {
 .catch((err) => {
   console.error('Error connecting to MongoDB:', err);
 });
+// Create a new model for the key signatory information
+const KeySignatory = mongoose.model('KeySignatory', {
+  firstName: String,
+  middleName: String,
+  lastName: String,
+  email: String,
+  phone: String,
+  aadhar: String,
+  dob: Date,
+  state: String,
+  city: String,
+  pincode: String,
+});
 
-// MongoDB Models
-// MongoDB Models
-const KeySignatorySchema = new mongoose.Schema({
-    firstName: String,
-    middleName: String,
-    lastName: String,
-    email: String,
-    phone: String,
-    aadhar: String,
-    userId: String,
+// Create a new route to handle the POST request
+app.post('/save-key-signatory', async (req, res) => {
+  // Get the key signatory information from the POST request body
+  const keySignatory = req.body;
+
+  // Create a new key signatory record from the POST request body
+  const newKeySignatory = new KeySignatory({
+    firstName: keySignatory.firstName,
+    middleName: keySignatory.middleName,
+    lastName: keySignatory.lastName,
+    email: keySignatory.email,
+    phone: keySignatory.phone,
+    aadhar: keySignatory.aadhar,
+    dob: keySignatory.dob,
+    state: keySignatory.state,
+    city: keySignatory.city,
+    pincode: keySignatory.pincode,
   });
-  
-  const KeySignatory = mongoose.model('KeySignatory', KeySignatorySchema);
-  
-  // Function to save key signatory information
-  async function saveKeySignatoryInformation({
-    firstName,
-    middleName,
-    lastName,
-    email,
-    phone,
-    aadhar,
-    userId,
-  }) {
-    // Create a new KeySignatory object
-    const newKeySignatoryDocument = new KeySignatory({
-      firstName,
-      middleName,
-      lastName,
-      email,
-      phone,
-      aadhar,
-      userId,
-    });
-  
-    // Save the KeySignatory object to MongoDB
-    await newKeySignatoryDocument.save();
-  }
-  
-  // Route to handle the POST request from the keysigner.html file
-  app.post('/saveKeySignatoryInformation', async (req, res) => {
-    // Get the key signatory information from the request body
-    const { firstName, middleName, lastName, email, phone, aadhar, userId } = req.body;
-  
-    // Save the key signatory information
-    await saveKeySignatoryInformation({
-      firstName,
-      middleName,
-      lastName,
-      email,
-      phone,
-      aadhar,
-      userId,
-    });
-  
-    // Send a success response
-    res.sendStatus(200);
-  });
-  
+
+  // Save the key signatory record to the database
+  await newKeySignatory.save();
+
+  // Send a success response to the client
+  res.status(201).json({ message: 'Key Signatory Saved!' });
+});
+
 const User = mongoose.model('User', {
   firstName: String,
   lastName: String,
@@ -94,15 +72,6 @@ const User = mongoose.model('User', {
   password: String,
 });
 
-const KeySignatoryAndAddSigner = mongoose.model('KeySignatoryAndAddSigner', {
-  firstName: String,
-  middleName: String,
-  lastName: String,
-  email: String,
-  phone: String,
-  aadhar: String,
-  userId: String,
-});
 
 // Routes
 app.post('/signup', async (req, res) => {
@@ -160,6 +129,8 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Login error', error: error.message });
   }
 });
+
+
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
