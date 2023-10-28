@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Tracking</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Track a Document</h1>
+        <form action="/track" method="POST">
+            <label for="referenceNumber">Reference Number:</label>
+            <input type="text" id="referenceNumber" name="referenceNumber" required>
+
+            <button type="submit">Track Document</button>
+        </form>
+
+        <% if (trackingStatus) { %>
+            <h2>Tracking Result:</h2>
+            <p><%= trackingStatus %></p>
+        <% } %>
+    </div>
+</body>
+</html>

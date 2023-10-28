@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Impact Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="/Impact Bootstrap Template - Index_files/css2" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/Impact Bootstrap Template - Index_files/bootstrap.min.css" rel="stylesheet">
+    <link href="/Impact Bootstrap Template - Index_files/bootstrap-icons.css" rel="stylesheet">
+    <link href="/Impact Bootstrap Template - Index_files/aos.css" rel="stylesheet">
+    <link href="/Impact Bootstrap Template - Index_files/glightbox.min.css" rel="stylesheet">
+    <link href="/Impact Bootstrap Template - Index_files/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/Impact Bootstrap Template - Index_files/main.css" rel="stylesheet">
+    
+    <style>
+        h1 {
+            font-size: 24px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+
+        .user-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .user-box {
+            width: 25%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .user-box h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .user-details {
+            font-size: 14px;
+            display: none; /* Initially hide the details */
+        }
+
+        .view-button,
+        .accept-button {
+            background-color: #01b399;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .view-button {
+            margin-bottom: 10px;
+        }
+
+        .accept-button {
+            background-color: #01b399;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .proffilee {
+            width: 80px;
+            height: 80px;
+            padding: 20px;
+        }
+
+        .user-box:hover {
+            transform: translateX(10px);
+        }
+
+        .user-box:hover .user-details {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-button {
+            float: right;
+            cursor: pointer;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+
+<header id="header" class="header d-flex align-items-center sticked">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/index.html" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1>Samadhanmitra<span>.</span></h1>
+        </a>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/index.html" class="active">Home</a></li>
+                <li><a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/index.html#about" class="">About</a></li>
+                <li><a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/index.html#testimonials"
+                       class="active">Testimonials</a></li>
+                <li><a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/index.html#faq" class="active">Questions</a></li>
+            </ul>
+            <div class="proffilee"><img src="/Impact Bootstrap Template - Index_files/unnamed.jpg" style="border-radius: 50%;"></div>
+        </nav><!-- .navbar -->
+
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    </div>
+</header><!-- End Header -->
+
+<main id="main" class="sticked-header-offset">
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Instant Request</h2>
+                <p>Aperiam dolorum et et wuia molestias qui eveniet numquam nihil porro incidunt dolores placeat sunt id nobis omnis tiledo stran delop</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <button id="refresh-button">Refresh Page</a></button>
+        <div class="slides-3 swiper swiper-initialized swiper-horizontal swiper-pointer-events aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+    <h1>Documents in the collection:</h1>
+    <div class="user-boxes">
+      <% documents.forEach(function(document, index) { %>
+        <div class="user-box">
+          
+          <h2>Name: <%= document.firstName%><%= document.lastName%></h2>
+          <p>Phone: <%= document.phone %></p>
+          <div class="user-details">
+            <p>Email: <%= document.email %></p>
+            <p>Aadhar: <%= document.aadhar %></p>
+            <p>Date of Birth: <%= document.dob %></p>
+            <p>State: <%= document.state %></p>
+            <p>City: <%= document.city %></p>
+            <p>Pincode: <%= document.pincode %></p>
+            <p>Digital Sign Path: <%= document.filePath %></p>
+            <p>Aadhar Sign Path: <%= document.aadharSignPath %></p>
+            <p>Reference Number: <%= document.referenceNumber %></p>
+          </div>
+          <button class="submit-button" data-index="<%= index %>">VIEW</button>
+          <button class="accept-button">ACCEPT</button>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+  
+  <div class="popup" id="user-popup">
+    <div class="popup-content">
+        <span class="close-button" id="close-popup">&times;</span>
+        <!-- User details will be displayed here -->
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    
+    <!-- ======= Stats Counter Section ======= -->
+    <section id="stats-counter" class="stats-counter">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+          <div class="row gy-4 align-items-center">
+              <div class="col-lg-6">
+                  <img src="/Impact Bootstrap Template - Index_files/stats-img.svg" alt="" class="img-fluid">
+              </div>
+              <div class="col-lg-6">
+                  <div class="stats-item d-flex align-items-center">
+                      <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="0" class="purecounter">32</span>
+                      <p><strong>Happy Clients</strong></p>
+                  </div><!-- End Stats Item -->
+                  <div class="stats-item d-flex align-items-center">
+                      <span data-purecounter-start="0" data-purecounter-end="2" data-purecounter-duration="0" class="purecounter">2</span>
+                      <p><strong>Pending Requests</strong></p>
+                  </div><!-- End Stats Item -->
+                  <div class="stats-item d-flex align-items-center">
+                      <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="0" class="purecounter">20</span>
+                      <p><strong>Completed</strong></p>
+                  </div><!-- End Stats Item -->
+              </div>
+          </div>
+      </div>
+  </section>
+</main>
+
+<a href="file:///C:/Users/ropot/OneDrive/Desktop/Impact%20(1)/Impact/sch%20reqm1.html#"
+ class="scroll-top d-flex align-items-center justify-content-center active"><i class="bi bi-arrow-up-short"></i></a>
+
+<script src="/Impact Bootstrap Template - Index_files/main.js.download"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   function refreshPage() {
+    location.reload();
+  }
+
+  // Add a click event listener to the button
+  document.getElementById('refresh-button').addEventListener('click', refreshPage);
+  $(document).ready(function () {
+      $('.submit-button').click(function () {
+          // Toggle the visibility of user details for the clicked item
+          $(this).siblings('.user-details').slideToggle();
+      });
+
+      $('.accept-button').click(function () {
+          // Remove the user box when "ACCEPT" is clicked
+          $(this).closest('.user-box').remove();
+      });
+  });
+</script>
+</body>
+</html>

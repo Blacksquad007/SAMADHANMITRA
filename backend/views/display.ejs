@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Data</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Data from MongoDB</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <!-- Add more table headers for other fields as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <% documents.forEach(document => { %>
+                    <tr>
+                        <td><%= document.name %></td>
+                        <td><%= document.email %></td>
+                        <td><%= document.phone %></td>
+                        <!-- Add more table cells for other fields as needed -->
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
