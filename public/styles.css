@@ -34,7 +34,7 @@ input {
 
 .radio-group label {
   cursor: pointer;
-  padding: 5px 55px;
+  padding: 9px 64px;
   border: 7px solid #ccc;
   border-radius: 127px;
   background-color: #fff;
@@ -183,7 +183,7 @@ form.sign-in-form {
 }
 
 .input-field {
-  max-width: 416px;
+  max-width: 436px;
   width: 100%;
   background-color: #f0f0f0;
   margin: 10px 0;
@@ -386,7 +386,7 @@ form.sign-in-form {
   pointer-events: all;
 }
 
-@media (max-width: 870px) {
+@media (max-width: 850px) {
   .container {
     min-height: 800px;
     height: 100vh;
@@ -411,8 +411,8 @@ form.sign-in-form {
   .panel {
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
-    padding: 2.5rem 8%;
+    align-items: first baseline;
+    padding: 0.1rem 4%;
     grid-column: 1 / 2;
   }
 
@@ -452,8 +452,8 @@ form.sign-in-form {
   }
 
   .container:before {
-    width: 1500px;
-    height: 1500px;
+    width: 1200px;
+    height: 1200px;
     transform: translateX(-50%);
     left: 30%;
     bottom: 68%;
@@ -464,7 +464,7 @@ form.sign-in-form {
 
   .container.sign-up-mode:before {
     transform: translate(-50%, 100%);
-    bottom: 32%;
+    bottom: 30%;
     right: initial;
   }
 
@@ -489,7 +489,7 @@ form.sign-in-form {
   }
 }
 
-@media (max-width: 570px) {
+@media (max-width: 500px) {
   form {
     padding: 0 1.5rem;
   }
@@ -505,12 +505,12 @@ form.sign-in-form {
   }
 
   .container:before {
-    bottom: 72%;
+    bottom: 85%;
     left: 50%;
   }
 
   .container.sign-up-mode:before {
-    bottom: 28%;
+    bottom: 18%;
     left: 50%;
   }
 }

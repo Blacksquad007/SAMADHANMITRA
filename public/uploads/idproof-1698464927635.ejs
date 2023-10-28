@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MongoDB Data</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      font-size: 24px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    .user-box {
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-box h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .user-details {
+      display: none; /* Initially hide the details */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Documents in the collection:</h1>
+    <div class="user-boxes">
+      <% documents.forEach(function(document, index) { %>
+        <div class="user-box">
+          <h2>Name: <%= document.name %></h2>
+          <p>Phone: <%= document.phone %></p>
+          <div class="user-details">
+            <p>Email: <%= document.email %></p>
+            <p>Aadhar: <%= document.aadhar %></p>
+            <p>Date of Birth: <%= document.dob %></p>
+            <p>State: <%= document.state %></p>
+            <p>City: <%= document.city %></p>
+            <p>Pincode: <%= document.pincode %></p>
+            <p>Digital Sign Path: <%= document.digitalSignPath %></p>
+            <p>Aadhar Sign Path: <%= document.aadharSignPath %></p>
+            <p>Reference Number: <%= document.referenceNumber %></p>
+          </div>
+          <button class="view-button" data-index="<%= index %>">VIEW</button>
+          <button class="accept-button">ACCEPT</button>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.view-button').click(function() {
+        // Toggle the visibility of user details for the clicked item
+        $(this).siblings('.user-details').slideToggle();
+      });
+
+      $('.accept-button').click(function() {
+        // Remove the user box when "ACCEPT" is clicked
+        $(this).closest('.user-box').remove();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 6000;
 const MONGODB_URI = 'mongodb+srv://shrivignesh:sih1286@atlascluster.pv8ypti.mongodb.net/?retryWrites=true&w=majority';
 const dbName = 'test'; // Specify the database name "test"
 const collectionName = 'keysignatories'; // Replace with the name of your collection

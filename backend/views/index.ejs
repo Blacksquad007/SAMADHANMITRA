@@ -165,7 +165,6 @@
     </section>
 
     <div class="container">
-        <button id="refresh-button">Refresh Page</a></button>
         <div class="slides-3 swiper swiper-initialized swiper-horizontal swiper-pointer-events aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
     <h1>Documents in the collection:</h1>
     <div class="user-boxes">
@@ -181,7 +180,7 @@
             <p>State: <%= document.state %></p>
             <p>City: <%= document.city %></p>
             <p>Pincode: <%= document.pincode %></p>
-            <p>Digital Sign Path: <%= document.filePath %></p>
+            <p>Digital Sign Path: <%= document.digitalSignPath %></p>
             <p>Aadhar Sign Path: <%= document.aadharSignPath %></p>
             <p>Reference Number: <%= document.referenceNumber %></p>
           </div>
@@ -198,16 +197,7 @@
         <!-- User details will be displayed here -->
     </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br><br><br><br>
     
     <!-- ======= Stats Counter Section ======= -->
     <section id="stats-counter" class="stats-counter">
@@ -241,12 +231,7 @@
 <script src="/Impact Bootstrap Template - Index_files/main.js.download"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-   function refreshPage() {
-    location.reload();
-  }
-
-  // Add a click event listener to the button
-  document.getElementById('refresh-button').addEventListener('click', refreshPage);
+  
   $(document).ready(function () {
       $('.submit-button').click(function () {
           // Toggle the visibility of user details for the clicked item
@@ -260,4 +245,4 @@
   });
 </script>
 </body>
-</html>
+</html> 
