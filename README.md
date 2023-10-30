@@ -1,6 +1,18 @@
 # SAMADHANMITRA
 
-A brief description of your project.
+ PS : SIH 1286 |   Incentives based Design for onboarding Legal Service Providers | SamadhanMitra #smartindiahackathon #sih1286 #sih #legalservices 
+
+SamadhanMitra: A New Way to Access Legal Services in India
+
+SamadhanMitra is an innovative e-Marketplace platform that is transforming the way legal services are accessed in India. By connecting clients with a diverse range of legal service providers, SamadhanMitra is making legal services more accessible, affordable, and efficient.
+
+In this video, we will discuss the following:
+
+The challenges of the Indian legal service sector
+How SamadhanMitra is addressing these challenges
+The benefits of using SamadhanMitra for both clients and legal service providers
+How to use the SamadhanMitra platform
+If you are looking for a more convenient and affordable way to access legal services, then SamadhanMitra is the platform for you.
 
 ## Table of Contents
 
@@ -12,7 +24,6 @@ A brief description of your project.
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
   - [Usage](#usage)
-  - [Contributing](#contributing)
   - [License](#license)
   - [Contact](#contact)
 
@@ -31,7 +42,7 @@ we offer
 Currently, obtaining legal services and identifying suitable advocates is a COMPLEX AND TIME-CONSUMING process. 
 People often face long waiting times and cumbersome token systems to access legal assistance. 
 Additionally, there is a LACK OF A CENTRALIZED PLATFORM where individuals can easily find and access a wide range of legal services, leading to fragmentation in the legal service sector.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/2b86fd43-4e4b-4645-9e32-3e45876c7746)
+
 
 
 ##Solution 
@@ -42,23 +53,22 @@ Our user-friendly interface streamlines the search for the right legal service p
 To promote transparency, we offer standardized service fees and We cater to both IMMEDIATE AND SCHEDULED SERVICES, providing FLEXIBILITY.
 
 Above all, our platform prioritizes SECURITY, guaranteeing the careful handling and confidentiality of legal matters.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/405586f7-b79b-41a7-a8f4-b35d781c226f)
+
 
 ## Features
 
 User-friendly interface for finding top-rated advocates based on public reviews.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/8a42d683-5bb7-49f8-ad5f-8b69de3157d7)
+
 
 Streamlined user experience for efficient legal service discovery and delivery.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/7c2b8f64-6b9c-495e-976a-3b8d994be2dd)
 
 Secure document storage with S-locker for users.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/f81fe8e6-c915-4c04-bd7d-4b41cce4a9e2)
+
 
 Incentive system based on ratings and reviews to motivate legal service providers.
-![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/f21c1546-b012-44ad-a274-2fb0ad6bbed4)
 
-Easy document notarization with options for instant or scheduled services![image](https://github.com/Blacksquad007/SAMADHANMITRA/assets/112714180/c5c3865c-1a44-4018-8c1a-ae2b833e149d)
+
+Easy document notarization with options for instant or scheduled services
 
 
 
