@@ -1,4 +1,4 @@
-# Project Name
+# SAMADHANMITRA
 
 A brief description of your project.
 
